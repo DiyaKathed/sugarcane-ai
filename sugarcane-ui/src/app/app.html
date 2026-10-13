@@ -1,0 +1,96 @@
+ <div class="dashboard">
+  <aside class="sidebar">
+    <div class="brand">🌱 CaneCare</div>
+    <p class="nav-heading">MAIN MENU</p>
+    <a class="nav-link active" href="#dashboard">▦ &nbsp; Dashboard</a>
+    <a class="nav-link" href="#farmers">♙ &nbsp; Farmers</a>
+    <a class="nav-link" href="#payments">₹ &nbsp; Payments</a>
+    <div class="sidebar-note">
+      <span>🌾</span>
+      <h3>Supporting our farmers</h3>
+      <p>Smarter insights for better sugarcane management.</p>
+    </div>
+  </aside>
+
+  <main class="main-content" id="dashboard">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">FARM MANAGEMENT SYSTEM</p>
+        <h1>Sugarcane Dashboard</h1>
+        <p class="muted">Monitor farmer deliveries and pending payments.</p>
+      </div>
+      <div class="profile"><span>👩🏻‍💻</span><div><strong>Factory Admin</strong><small>Administrator</small></div></div>
+    </header>
+
+    <section class="stats-grid">
+      <article class="stat-card">
+        <div class="stat-icon green">♙</div><p>Total Farmers</p><h2>10</h2><small>Registered in sample data</small>
+      </article>
+      <article class="stat-card">
+        <div class="stat-icon yellow">🌾</div><p>Sugarcane Supplied</p><h2>1,317 tonnes</h2><small>Across all 10 farmers</small>
+      </article>
+      <article class="stat-card" id="payments">
+        <div class="stat-icon orange">₹</div><p>Total Pending Payments</p><h2>₹3,16,500</h2><small>Sample database records</small>
+      </article>
+    </section>
+
+    <section class="ai-panel">
+      <div class="section-title">
+        <div><span class="ai-icon">✦</span><h2>Ask CaneCare AI</h2></div>
+        <span class="powered">Powered by MCP + OpenAI</span>
+      </div>
+      <p class="muted">Ask questions about farmer deliveries and payment records.</p>
+      <form (submit)="askQuestion($event)">
+        <label for="question">Your question</label>
+        <textarea id="question" name="question" rows="3"
+          placeholder="Example: Which 3 farmers have the highest pending payments?"
+          [value]="question"
+          (input)="updateQuestion($event)"></textarea>
+        <div class="form-footer">
+          <span class="muted">Answers will be based on your database records.</span>
+          <button type="submit" [disabled]="loading">{{ loading ? 'Thinking...' : '✦ Ask AI' }}</button>
+        </div>
+      </form>
+      <div *ngIf="loading">
+        <p>Thinking...</p>
+      </div>
+      <div class="answer" *ngIf="answer">
+        <h3>AI Answer</h3>
+        <p>{{ answer }}</p>
+      </div>
+      <p class="error" *ngIf="error">{{ error }}</p>
+    </section>
+<!-- AI Answer -->
+<div *ngIf="answer" class="ai-answer">
+  <h3>AI Answer</h3>
+  <p style="white-space: pre-line;">{{ answer }}</p>
+</div>
+
+<!-- Loading indicator -->
+<div *ngIf="loading">
+  <p>Thinking...</p>
+</div>
+
+<!-- Error message -->
+<div *ngIf="error">
+  <p style="color: red;">{{ error }}</p>
+</div>
+
+    <section class="farmers-panel" id="farmers">
+      <div class="section-title"><div><span class="table-icon">▤</span><h2>Farmer Overview</h2></div><span class="muted">Illustrative sample data</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Farmer</th><th>Village</th><th>Supply (tonnes)</th><th>Pending Amount</th></tr></thead>
+          <tbody>
+            <tr><td>Anil Wagh</td><td>Shirdi</td><td>200.00</td><td class="money">₹52,000</td></tr>
+            <tr><td>Sunita Shinde</td><td>Sakuri</td><td>150.00</td><td class="money">₹45,000</td></tr>
+            <tr><td>Kiran Deshmukh</td><td>Sangamner</td><td>160.00</td><td class="money">₹40,000</td></tr>
+            <tr><td>Ganesh Thorat</td><td>Loni</td><td>175.50</td><td class="money">₹38,000</td></tr>
+            <tr><td>Rahul Patil</td><td>Kopargaon</td><td>120.50</td><td class="money">₹30,500</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <footer>© CaneCare · Sugarcane Farmer Management · Learning project</footer>
+  </main>
+</div>
